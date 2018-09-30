@@ -1,15 +1,14 @@
-ls -lh /etc/ssh
-systemctl stop ssh
-sudo ssh-keygen -A
-systemctl start ssh
+    ls -lh /etc/ssh
+    systemctl stop ssh
+    sudo ssh-keygen -A
+    systemctl start ssh
 
-ip a
-sudo passwd ubuntu-server
+    ip a
+    sudo passwd ubuntu-server
 
-tmux
+    tmux
 
-tmux a
-
+    tmux a
 
     sudo -iexport LANG=C
     apt update -y && apt full-upgrade -y
@@ -21,15 +20,15 @@ tmux a
     sgdisk -Z -n9:-8M:0 -t9:bf07 -c9:sdb9-Reserved -n1:1M:+512 -t1:EF00 -c1:sdb1-EFI -n2:0:0 -t2:bf01 -c2:sdb2-zfs /dev/sdb
 
 ## ZFS /boot boottal
-    sgdisk -Z -n9:-8M:0 -t9:bf07 -c9:sda9-Reserved -n1:1M:+1024 -t1:8300 -c1:sda1-BOOT -n2:0:0 -t2:bf01 -c2:sda2-zfs /dev/sda
-    sgdisk -Z -n9:-8M:0 -t9:bf07 -c9:sdb9-Reserved -n1:1M:+1024 -t1:8300 -c1:sdb1-BOOT -n2:0:0 -t2:bf01 -c2:sdb2-zfs /dev/sdb
+    sgdisk -Z -n9:-8M:0 -t9:bf07 -c9:sda9-Reserved -n1:1M:+1023M -t1:8300 -c1:sda1-BOOT -n2:0:0 -t2:bf01 -c2:sda2-zfs /dev/sda
+    sgdisk -Z -n9:-8M:0 -t9:bf07 -c9:sdb9-Reserved -n1:1M:+1023M -t1:8300 -c1:sdb1-BOOT -n2:0:0 -t2:bf01 -c2:sdb2-zfs /dev/sdb
 
 apt install -y zfsutils-linux
 
 mkdrir -p /target
 
 ## ZFS egy lemezzel
-    zpool create -o ashift=12 -O atime=off -O canmount=off -O compression=lz4 -O normalization=formD -O mountpoint=/ -R /target disk /dev/sda2
+    zpool create -o ashift=12 -O atime=off -O canmount=off -O compression=lz4 -O normalization=formD -O mountpoint=/ -R /target systempool /dev/sda2
 
 ## ZFS mirror
     zpool create -o ashift=12 -O atime=off -O canmount=off -O compression=lz4 -O normalization=formD -O mountpoint=/ -R /target mirror /dev/sda2 /dev/sdb2
