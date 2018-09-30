@@ -18,12 +18,12 @@ apt -y update && apt -y full-upgrade
 cat /proc/partitions
 
 ## ZFS EFI boottal
-sgdisk -Z -n9:-8M:0 -t9:bf07 -c9:sda9-Reserved -n1:1M:+512 -t1:EF00 -c1:sda1-EFI -n2:0:0 -t2:bf01 -c2:sda2-zfs /dev/sda
-sgdisk -Z -n9:-8M:0 -t9:bf07 -c9:sdb9-Reserved -n1:1M:+512 -t1:EF00 -c1:sdb1-EFI -n2:0:0 -t2:bf01 -c2:sdb2-zfs /dev/sdb
+    sgdisk -Z -n9:-8M:0 -t9:bf07 -c9:sda9-Reserved -n1:1M:+512 -t1:EF00 -c1:sda1-EFI -n2:0:0 -t2:bf01 -c2:sda2-zfs /dev/sda
+    sgdisk -Z -n9:-8M:0 -t9:bf07 -c9:sdb9-Reserved -n1:1M:+512 -t1:EF00 -c1:sdb1-EFI -n2:0:0 -t2:bf01 -c2:sdb2-zfs /dev/sdb
 
 ## ZFS /boot boottal
-sgdisk -Z -n9:-8M:0 -t9:bf07 -c9:sda9-Reserved -n1:1M:+1024 -t1:8300 -c1:sda1-BOOT -n2:0:0 -t2:bf01 -c2:sda2-zfs /dev/sda
-sgdisk -Z -n9:-8M:0 -t9:bf07 -c9:sdb9-Reserved -n1:1M:+1024 -t1:8300 -c1:sdb1-BOOT -n2:0:0 -t2:bf01 -c2:sdb2-zfs /dev/sdb
+    sgdisk -Z -n9:-8M:0 -t9:bf07 -c9:sda9-Reserved -n1:1M:+1024 -t1:8300 -c1:sda1-BOOT -n2:0:0 -t2:bf01 -c2:sda2-zfs /dev/sda
+    sgdisk -Z -n9:-8M:0 -t9:bf07 -c9:sdb9-Reserved -n1:1M:+1024 -t1:8300 -c1:sdb1-BOOT -n2:0:0 -t2:bf01 -c2:sdb2-zfs /dev/sdb
 
 apt -y install zfsutils-linux
 
